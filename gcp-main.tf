@@ -28,3 +28,15 @@ resource "google_artifact_registry_repository" "my-repo" {
   description = "Imagens Docker"
   format = "DOCKER"
 }
+
+// Cria database
+resource "google_sql_database_instance" "instance" {
+  name             = var.db_instance
+  region           = var.region
+  database_version = "MYSQL_5_7"
+  settings {
+    tier = "db-f1-micro"
+  }
+
+  deletion_protection  = "true"
+}
